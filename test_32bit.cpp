@@ -11,17 +11,63 @@
  * Created on 23 January 2019, 14:59
  */
 
-//#include <cstdlib>
-//using namespace std;
 
-
-
+#include <iostream>
+#include <random>
+#include <iomanip>
+#include <string>
+#include <map>
+#include <list>
+#include "s32bit.h"
+#include "addressable_float.h"
 
 /*
  * 
+ * Guess what this function is ...
+ *  
  */
 int main(int argc, char** argv) {
 
+    std::cout << "building an _addressable_float" << std:: endl;
+    
+    std::random_device rd;
+    std::mt19937 e2(rd());
+    std::uniform_real_distribution<> dist(-1, 1);
+  
+    
+    //short float sf=0;
+    
+    // so let's get this tested ...
+    
+    float f=dist(e2);
+    u32bits u32;
+    u32.f=f;
+    
+    _addressable_float af1(f);
+    std::cout << "built    an _addressable_float from a float" << std:: endl;
+    std::cout << af1 << std::endl;
+    
+    
+    _addressable_float af2(u32);
+    std::cout << "built    an _addressable_float from a u32bits union" << std:: endl;
+    std::cout << af2 << std::endl;
+    
+    // JKK: cool. what do i prod with a stick next?
+    // JKK: could do bit addressing, e.g. flip the sign bit ...
+ 
+    const short sign_bit=af1.size()-1;
+    std::cout << "sign bit: " << af1.get(sign_bit) << std::endl;
+    std::cout << "float: " << af1.getf() << std::endl;
+    af1.set(sign_bit, ! af1.get(sign_bit));
+    std::cout << "sign bit NOW: " << af1.get(sign_bit) << std::endl;
+    std::cout << "float NOW: " << af1.getf() << std::endl;
+    
+    // JKK: right, looking pretty good. now the germinal centres ...
+    // JKK: back again, couple of days later ... let's get going ...
+    
+    
+    
+    
     return 0;
 }
 

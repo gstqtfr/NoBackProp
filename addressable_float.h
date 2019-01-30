@@ -40,10 +40,15 @@ public:
         _u.f=0.0;
     }
     
-    _addressable_float(float f) {
+    explicit _addressable_float(float f) {
         _u.f=f;
     }
     
+    
+    explicit _addressable_float(u32bits uf) {
+        _u=uf;
+    }
+
     // JKK: since this is a union, we don't have to
     // JKK: worry about init'g the bit field
     _addressable_float(const _addressable_float & af) {

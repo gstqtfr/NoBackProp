@@ -25,8 +25,6 @@ _addressable_float germinal_centre::somatic_hypermutation(const _addressable_flo
 }
 
 
-
-
 germinal_centre::germinal_centre(const int sz, const _addressable_float & af) {
         // bit hacky, but this is how we create & initialise 
         // an array (use vector, then make_unique) ...
