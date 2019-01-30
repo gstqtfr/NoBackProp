@@ -18,8 +18,10 @@
 #include <string>
 #include <map>
 #include <list>
+#include <stdexcept>
 #include "s32bit.h"
 #include "addressable_float.h"
+#include "germinal_centre.h"
 
 /*
  * 
@@ -62,8 +64,27 @@ int main(int argc, char** argv) {
     std::cout << "sign bit NOW: " << af1.get(sign_bit) << std::endl;
     std::cout << "float NOW: " << af1.getf() << std::endl;
     
+    
+    // let's give this a whole bunch of random integers & see if 
+    // the exception-throwing mechanism works okay ...
+    
+    std::cout << std::endl << "trying a deliberately fukd index" 
+            << std::endl;
+    
+    try {
+        af2.get(301);
+    } catch ( const std::invalid_argument& e) {
+        std::cout << "received exception: " << e.what() << std::endl;
+    }
+    
     // JKK: right, looking pretty good. now the germinal centres ...
     // JKK: back again, couple of days later ... let's get going ...
+    
+    const int N=20;
+    germinal_centre gc1(N, af1);
+    
+    std::cout << "germinal centre::size == " << gc1.size()
+            << std::endl;
     
     
     

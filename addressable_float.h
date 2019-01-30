@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <stdexcept>
 #include "s32bit.h"
 
 class _addressable_float {
@@ -64,7 +65,10 @@ public:
     unsigned get(unsigned pos) const {
         unsigned val=0;
         if (!inside_range(pos, val)) {
-            throw "Parameter out of range";
+            std::string err_msg =  "received position argument "
+                    + std::to_string(pos)
+                    + ", which is out of range";
+            throw std::invalid_argument(err_msg);
         }
         switch (pos) {
             case 31:
