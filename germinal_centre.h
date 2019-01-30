@@ -35,17 +35,21 @@ class germinal_centre {
 private:
     
     std::vector<std::unique_ptr<_addressable_float>> gc;
-    std::uniform_int_distribution<int> distr; // guaranteed unbiased
+    std::uniform_int_distribution<int> disti; // guaranteed unbiased
+    // JKK: RESTORE TO PRIVATE once tested
+    //const unsigned short inline get_hotspot() const; 
+    // const unsigned short inline get_random_length() const
 
 public:
 
-    // JKK: might need make_unique_default_init here ...
-
     germinal_centre(const int sz, const _addressable_float & af); 
-
-    const long unsigned size() const { return gc.size(); }
-
+    const int unsigned inline size() const { return gc.size(); }
     _addressable_float somatic_hypermutation(const _addressable_float & u);
+    
+    // JKK: RESTORE TO PRIVATE once tested
+    const unsigned short get_hotspot() const;
+    const unsigned short get_random_length() const;
+    
 };
 
 

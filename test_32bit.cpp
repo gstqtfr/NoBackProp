@@ -35,11 +35,6 @@ int main(int argc, char** argv) {
     std::random_device rd;
     std::mt19937 e2(rd());
     std::uniform_real_distribution<> dist(-1, 1);
-  
-    
-    //short float sf=0;
-    
-    // so let's get this tested ...
     
     float f=dist(e2);
     u32bits u32;
@@ -85,6 +80,12 @@ int main(int argc, char** argv) {
     
     std::cout << "germinal centre::size == " << gc1.size()
             << std::endl;
+    
+    std::cout << "testing germinal_centre get_hotspot" << std:: endl;
+    
+    for (int i=0; i<N; i++) {
+        std::cout << "random hotspot: " << gc1.get_hotspot() << std::endl;
+    }
     
     
     
