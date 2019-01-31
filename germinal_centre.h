@@ -37,7 +37,6 @@ private:
     _addressable_float af;
     std::unique_ptr<random_integer> i_dist;
     std::vector<std::unique_ptr<_addressable_float>> gc;
-    //std::vector<_addressable_float> gc;
     // JKK: RESTORE TO PRIVATE once tested
     //const unsigned short inline get_hotspot() const; 
     //const unsigned short inline get_random_length() const

@@ -97,7 +97,11 @@ int main(int argc, char** argv) {
         std::cout << "random hotspot: " << gc1.get_hotspot() << std::endl;
     }
     
+    std::cout << "testing germinal_centre get_random_length" << std:: endl;
     
+    for (int i=0; i<N; i++) {
+        std::cout << "random hotspot: " << gc1.get_random_length() << std::endl;
+    }
     
     
     return 0;

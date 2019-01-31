@@ -29,8 +29,10 @@ int germinal_centre::get_hotspot() {
 
 int germinal_centre::get_random_length() const {
 
-
-    return 0;
+    int _length = i_dist->get();
+    if (verbose)
+        std::cout << _length << std::endl;
+    return _length;
 }
 
 
