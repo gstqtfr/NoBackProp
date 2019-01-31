@@ -19,20 +19,11 @@ const bool verbose = true;
 // _addressable_fields? or u32bits?
 
 int germinal_centre::get_hotspot() {
-
-    int hotspot = i_dist->get();
-    if (verbose)
-        std::cout << hotspot << std::endl;
-
-    return hotspot;
+    return i_dist->get();
 }
 
 int germinal_centre::get_random_length() const {
-
-    int _length = i_dist->get();
-    if (verbose)
-        std::cout << _length << std::endl;
-    return _length;
+    return i_dist->get();
 }
 
 
