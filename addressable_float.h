@@ -38,34 +38,36 @@ private:
 public:
 
     _addressable_float() {
-        _u.f=0.0;
+        _u.f = 0.0;
     }
-    
+
     explicit _addressable_float(float f) {
-        _u.f=f;
+        _u.f = f;
     }
-    
-    
+
     explicit _addressable_float(u32bits uf) {
-        _u=uf;
+        _u = uf;
     }
 
     // JKK: since this is a union, we don't have to
     // JKK: worry about init'g the bit field
+
     _addressable_float(const _addressable_float & af) {
-        _u.f=af._u.f;
+        _u.f = af._u.f;
     }
-    
+
     int size() const {
         return 32;
     }
 
-    float getf() const { return _u.f; }
-    
+    float getf() const {
+        return _u.f;
+    }
+
     unsigned get(unsigned pos) const {
-        unsigned val=0;
+        unsigned val = 0;
         if (!inside_range(pos, val)) {
-            std::string err_msg =  "received position argument "
+            std::string err_msg = "received position argument "
                     + std::to_string(pos)
                     + ", which is out of range";
             throw std::invalid_argument(err_msg);
@@ -174,6 +176,7 @@ public:
     }
 
     // TODO: JKK: needs a template? i.e. for int, short, etc. ...
+
     unsigned set(unsigned pos, unsigned val) {
         // JKK: exception? error message? eh? dunno ...
         // JKK: exception. if this occurs, there's some major
@@ -185,28 +188,28 @@ public:
 
         switch (pos) {
             case 31:
-                 _u.bits.s = val;
+                _u.bits.s = val;
                 break;
             case 30:
-                 _u.bits.e0 = val;
+                _u.bits.e0 = val;
                 break;
             case 29:
-                 _u.bits.e1 = val;
+                _u.bits.e1 = val;
                 break;
             case 28:
-                 _u.bits.e2 = val;
+                _u.bits.e2 = val;
                 break;
             case 27:
-                 _u.bits.e3 = val;
+                _u.bits.e3 = val;
                 break;
             case 26:
-                 _u.bits.e4 = val;
+                _u.bits.e4 = val;
                 break;
             case 25:
-                 _u.bits.e5 = val;
+                _u.bits.e5 = val;
                 break;
             case 24:
-                 _u.bits.e6 = val;
+                _u.bits.e6 = val;
                 break;
             case 23:
                 _u.bits.e7 = val;
@@ -285,10 +288,13 @@ public:
 
         return pos;
     }
-    
+
+    std::unique_ptr<_addressable_float> _addressable_float_factory(_addressable_float __af) {
+        return std::make_unique<_addressable_float>(__af);
+    }
+
     friend std::ostream & operator<<(std::ostream &, const _addressable_float &);
 };
-
 
 #endif /* ADDRESSABLE_FLOAT_H */
 

@@ -26,17 +26,27 @@
 /*
  * 
  * Guess what this function is ...
- *  
+ * 
+ * We'll have to do all the random generator stuff here
+ * 
+ * Seems like trying to get this up-&-running in the class
+ * is too much of a pain (semi-impossible) ...
  */
 int main(int argc, char** argv) {
 
     std::cout << "building an _addressable_float" << std:: endl;
     
+    /*
+     * we'll have to do all the random number generator stuff here ...
+     */
+    
     std::random_device rd;
     std::mt19937 e2(rd());
-    std::uniform_real_distribution<> dist(-1, 1);
+    std::uniform_real_distribution<> r_dist(-1, 1);
+    // ... yuk ...
+    std::uniform_int_distribution<> i_dist(0, 32);
     
-    float f=dist(e2);
+    float f=r_dist(e2);
     u32bits u32;
     u32.f=f;
     
@@ -76,7 +86,7 @@ int main(int argc, char** argv) {
     // JKK: back again, couple of days later ... let's get going ...
     
     const int N=20;
-    germinal_centre gc1(N, af1);
+    germinal_centre gc1(N, af1, 0, 31);
     
     std::cout << "germinal centre::size == " << gc1.size()
             << std::endl;

@@ -30,26 +30,34 @@
 #include <iostream>
 #include <vector>
 #include "addressable_float.h"
+#include "random_integer.h"
 
 class germinal_centre {
 private:
-    
+    _addressable_float af;
+    std::unique_ptr<random_integer> i_dist;
     std::vector<std::unique_ptr<_addressable_float>> gc;
-    std::uniform_int_distribution<int> disti; // guaranteed unbiased
+    //std::vector<_addressable_float> gc;
     // JKK: RESTORE TO PRIVATE once tested
     //const unsigned short inline get_hotspot() const; 
-    // const unsigned short inline get_random_length() const
+    //const unsigned short inline get_random_length() const
+
 
 public:
 
-    germinal_centre(const int sz, const _addressable_float & af); 
-    const int unsigned inline size() const { return gc.size(); }
+    germinal_centre(const int sz,
+            const _addressable_float & _af, int, int);
+
+    const int unsigned inline size() const {
+        return af.size();
+    }
+   
     _addressable_float somatic_hypermutation(const _addressable_float & u);
-    
+
     // JKK: RESTORE TO PRIVATE once tested
-    const unsigned short get_hotspot() const;
-    const unsigned short get_random_length() const;
-    
+    int get_hotspot();
+    int get_random_length() const;
+
 };
 
 
