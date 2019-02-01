@@ -27,8 +27,5 @@ private:
     std::uniform_int_distribution<> dist;
 };
 
-
-// random_integer r_dist(0,31);
-
 #endif /* RANDOM_INTEGER_H */
 

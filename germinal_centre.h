@@ -37,24 +37,24 @@ private:
     _addressable_float af;
     std::unique_ptr<random_integer> i_dist;
     std::vector<std::unique_ptr<_addressable_float>> gc;
+    float exp_dist(float x, float lambda) {
+       return (lambda * exp(-lambda * x));
+    }
+    float lambda;
     // JKK: RESTORE TO PRIVATE once tested
     //const unsigned short inline get_hotspot() const; 
     //const unsigned short inline get_random_length() const
 
 
 public:
-
     germinal_centre(const int sz,
-            const _addressable_float & _af, int, int);
-
+            const _addressable_float & _af, int, int, float);
     const int unsigned inline size() const {
         return af.size();
     }
-   
     _addressable_float somatic_hypermutation(const _addressable_float & u);
-
     // JKK: RESTORE TO PRIVATE once tested
-    int get_hotspot();
+    int get_hotspot() const;
     int get_random_length() const;
 
 };

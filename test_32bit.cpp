@@ -85,8 +85,8 @@ int main(int argc, char** argv) {
     // JKK: right, looking pretty good. now the germinal centres ...
     // JKK: back again, couple of days later ... let's get going ...
     
-    const int N=20;
-    germinal_centre gc1(N, af1, 0, 31);
+    const int N=50;
+    germinal_centre gc1(N, af1, 0, 31, 0.25);
     
     std::cout << "germinal centre::size == " << gc1.size()
             << std::endl;
@@ -102,6 +102,7 @@ int main(int argc, char** argv) {
     for (int i=0; i<N; i++) {
         std::cout << "random hotspot: " << gc1.get_random_length() << std::endl;
     }
+    
     
     
     return 0;
