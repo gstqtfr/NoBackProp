@@ -37,9 +37,7 @@ private:
     _addressable_float af;
     std::unique_ptr<random_integer> i_dist;
     std::vector<std::unique_ptr<_addressable_float>> gc;
-    float exp_dist(float x, float lambda) {
-       return (lambda * exp(-lambda * x));
-    }
+
     float lambda;
     // JKK: RESTORE TO PRIVATE once tested
     //const unsigned short inline get_hotspot() const; 
@@ -56,6 +54,9 @@ public:
     // JKK: RESTORE TO PRIVATE once tested
     int get_hotspot() const;
     int get_random_length() const;
+    float exp_dist(float x, float lambda) {
+       return (lambda * exp(-lambda * x));
+    }
 
 };
 

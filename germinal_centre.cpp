@@ -12,11 +12,15 @@
 const bool verbose = true;
 
 int germinal_centre::get_hotspot() const {
+     
     return i_dist->get();
 }
 
 int germinal_centre::get_random_length() const {
+        
     return i_dist->get();
+    
+    //return 0;
 }
 
 // JKK: make this inline? private? (i.e. just get hotspot)
@@ -49,9 +53,10 @@ germinal_centre::germinal_centre(const int sz,
     // _addressable_float param
     for (const auto& af : gc) {
         std::wcout << "Original float: " << af->getf() << std::endl;
-        
     }
 
+    
+    
     // we'll need to get the original floats mutated here ...
 
     // JKK: 2DO: need a way of passing these parameters into
