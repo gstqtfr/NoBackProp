@@ -54,10 +54,9 @@ public:
     // JKK: RESTORE TO PRIVATE once tested
     int get_hotspot() const;
     int get_random_length() const;
-    float exp_dist(float x, float lambda) {
+    float exp_dist(float x) {
        return (lambda * exp(-lambda * x));
     }
-
 };
 
 

@@ -59,9 +59,10 @@ int main(int argc, char** argv) {
 
     for (int i=0; i <N; i++) {
         // this is what we get from the gc ATM ...
-        std::cout << gc1.get_hotspot() << std::endl;
+        float f = gc1.get_hotspot();
         // ... & we want to bias it ...
-        
+        float ef = gc1.exp_dist(f);
+        std::cout << f << " " << ef << std::endl;
     }
 
     return 0;
