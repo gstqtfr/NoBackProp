@@ -103,6 +103,12 @@ int main(int argc, char** argv) {
         std::cout << "random hotspot: " << gc1.get_random_length() << std::endl;
     }
     
+    std::cout << "testing germinal_centre copy ctor" << std::endl;
+    
+    germinal_centre gc2(gc1);
+    
+    
+    
     
     
     return 0;

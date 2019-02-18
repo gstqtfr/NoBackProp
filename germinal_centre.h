@@ -37,6 +37,8 @@ private:
     _addressable_float af;
     std::unique_ptr<random_integer> i_dist;
     std::vector<std::unique_ptr<_addressable_float>> gc;
+    int min;
+    int max;
 
     float lambda;
     // JKK: RESTORE TO PRIVATE once tested
@@ -45,8 +47,22 @@ private:
 
 
 public:
+    
+    germinal_centre() { }
+    
     germinal_centre(const int sz,
-            const _addressable_float & _af, int, int, float);
+            const _addressable_float & _af, 
+            int, 
+            int, 
+            float);
+    
+    germinal_centre(const germinal_centre &);
+    
+    ~germinal_centre() { 
+        // do nothing, let the system worry about the 
+        // unique_pointers ...
+    }
+    
     const int unsigned inline size() const {
         return af.size();
     }

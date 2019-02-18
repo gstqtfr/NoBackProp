@@ -7,7 +7,7 @@ s32bit.o:
 addressable_float.o:
 	g++ -g -c -std=c++17 -o addressable_float.o addressable_float.cpp
 	
-germinal_centre.o:
+germinal_centre.o: addressable_float.o
 	g++ -g -c -std=c++17 -o germinal_centre.o germinal_centre.cpp
 	
 clean:

@@ -37,25 +37,57 @@ private:
 
 public:
 
+    // a default constructor: X()
     _addressable_float() {
+        std::cout << "_addressable_float::default ctor" << std::endl;
         _u.f = 0.0;
     }
 
+    //the slightly odd destructor thing - declare here &
+    // define in the .cpp file (?!)
+    ~_addressable_float();
+    
+    // exp. ctor for tyoe float
     explicit _addressable_float(float f) {
+        std::cout << "_addressable_float::explicit float ctor" << std::endl;
         _u.f = f;
     }
 
+    // exp. ctor for type u32bits
     explicit _addressable_float(u32bits uf) {
+        std::cout << "_addressable_float::explicit u32bits ctor" << std::endl;
         _u = uf;
     }
 
     // JKK: since this is a union, we don't have to
     // JKK: worry about init'g the bit field
 
+    // a copy constructor: X(const X&)
     _addressable_float(const _addressable_float & af) {
+         std::cout << " _addressable_float(const _addressable_float) ctor" << std::endl;
         _u.f = af._u.f;
     }
 
+    // a copy assignment: operator=(const X&)
+    _addressable_float operator=(const _addressable_float & af) {
+        std::cout << "_addressable_float operator=(const _addressable_float & af) ctor" << std::endl;
+        _u.f = af._u.f;
+        return *this;
+    }
+    
+    // a move constructor: X(X&&)
+    _addressable_float(_addressable_float&& af) {
+       std::cout << " _addressable_float(const _addressable_float&& ) (rvalue) ctor" << std::endl; 
+       _u.f = af._u.f;
+    }
+    
+    // a move assignment: operator=(X&&)
+    _addressable_float & operator=(_addressable_float&& other) {
+        std::cout << "operator=(_addressable_float&& other (rvalue)" << std::endl;
+        _u.f = other._u.f;
+        return *this;
+    }
+    
     int size() const {
         return 32;
     }

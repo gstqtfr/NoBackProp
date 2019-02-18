@@ -36,9 +36,9 @@ _addressable_float germinal_centre::somatic_hypermutation(const _addressable_flo
 
 germinal_centre::germinal_centre(const int sz,
         const _addressable_float & _af, 
-        int min, 
-        int max,
-        float _lambda): lambda(_lambda) {
+        int _min, 
+        int _max,
+        float _lambda): min(_min), max(_max), lambda(_lambda) {
 
     af = _af;
     i_dist = std::unique_ptr<random_integer>(new random_integer(min, max));
@@ -55,10 +55,39 @@ germinal_centre::germinal_centre(const int sz,
         std::wcout << "Original float: " << af->getf() << std::endl;
     }
 
-    
-    
     // we'll need to get the original floats mutated here ...
 
     // JKK: 2DO: need a way of passing these parameters into
     // JKK: 2DO: the constructor & initialising them there ...
+}
+
+germinal_centre::germinal_centre(const germinal_centre & _gc) {
+    
+    
+    /*
+    // so, we need to copy across all the stuff from _gc
+    // hopefully, without fucking the whole thing in half
+    // Q: what happens if it's already initialised?
+    // ... by which i mean *this ...
+    // A: hang on, by default, this is a *constructor*, so by 
+    //    the semantics of ctors, it shouldn't be already 
+    //    constructed ...
+    // so let's press on ...
+    
+    lambda=_gc.lambda;
+    min=_gc.min;
+    max=_gc.max;
+    af = _gc.af;
+    
+    i_dist = std::unique_ptr<random_integer>(new random_integer(min, max));
+
+    // bit hacky, but this is how we create & initialise 
+    // an array (use vector, then make_unique) ...
+    for (int i = 0; i < _gc.af.size(); i++) {
+        gc.push_back(af);
+        std::cout << af << std::endl;
+    }
+
+    
+    */
 }
