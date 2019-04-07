@@ -17,6 +17,7 @@
 // in which we define The Flip out of a germinal centre
 
 // a GC has to 
+
 // a) accept an _addressable_float
 // b) clone it
 // c) hypermutate it
@@ -29,6 +30,7 @@
 #include <memory>
 #include <iostream>
 #include <vector>
+#include <math.h>
 #include "addressable_float.h"
 #include "random_integer.h"
 

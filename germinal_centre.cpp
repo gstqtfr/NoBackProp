@@ -12,15 +12,11 @@
 const bool verbose = true;
 
 int germinal_centre::get_hotspot() const {
-     
     return i_dist->get();
 }
 
 int germinal_centre::get_random_length() const {
-        
     return i_dist->get();
-    
-    //return 0;
 }
 
 // JKK: make this inline? private? (i.e. just get hotspot)
