@@ -34,6 +34,10 @@
 #include "addressable_float.h"
 #include "random_integer.h"
 
+
+// rather than using pointers here, i'm going to use a 
+// list or vector, so i can just fucking *get on with it*
+
 class germinal_centre {
 private:
     _addressable_float af;
@@ -65,13 +69,20 @@ public:
         // unique_pointers ...
     }
     
+    // copy assignment operator
+    germinal_centre & operator=(const germinal_centre &); 
+    
     const int unsigned inline size() const {
         return af.size();
     }
+    
     _addressable_float somatic_hypermutation(const _addressable_float & u);
-    // JKK: RESTORE TO PRIVATE once tested
+    
+    // JKK: RESTORE TO PRIVATE once tested? ...
     int get_hotspot() const;
+    
     int get_random_length() const;
+    
     float exp_dist(float x) {
        return (lambda * exp(-lambda * x));
     }

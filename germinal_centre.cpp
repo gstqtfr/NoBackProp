@@ -86,4 +86,15 @@ germinal_centre::germinal_centre(const germinal_centre & _gc) {
 
     
     */
-}
+    }
+    
+    // copy assignment operator
+    germinal_centre & germinal_centre::operator=(const germinal_centre & other ) {
+        if (this != &other) { // self-assignment check expected
+            if (other.size() != size()) {
+                
+            }
+        }
+        return *this;
+    }
+    
