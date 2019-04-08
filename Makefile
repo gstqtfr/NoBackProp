@@ -10,5 +10,8 @@ addressable_float.o:
 germinal_centre.o: addressable_float.o
 	g++ -g -c -std=c++17 -o germinal_centre.o germinal_centre.cpp
 	
+clone_and_mutate.o: addressable_float.o
+	g++ -g -c -std=c++17 -o addressable_float.o addressable_float.cpp
+	
 clean:
-	rm s32bit.o addressable_float.o germinal_centre.o test_32bit
+	rm s32bit.o addressable_float.o germinal_centre.o clone_and_mutate.o test_32bit

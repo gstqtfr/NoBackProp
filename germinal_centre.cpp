@@ -23,17 +23,12 @@ int germinal_centre::get_random_length() const {
     return i_dist->get();
 }
 
+// JKK: this is starting to get on my tits ...
+// JKK: time to rewrite this w'out the unique ptr crap 
+// JKK: just use a list, no pointers, just straightforward
+// JKK: local refs. 
+
 void germinal_centre::mutate_clone_pool() {
-
-    // JKK: dah, fuck. forgot i was dealing with a unique_ptr here ...
-
-    // JKK: from 
-    // https://stackoverflow.com/questions/3283778/why-can-i-not-push-back-a-unique-ptr-into-a-vector
-    
-    // You need to move the unique_ptr:
-    // vec.push_back(std::move(ptr2x));
-    
-    
 
     /*
     for (int i=0; i < size(); i++) {
@@ -44,7 +39,6 @@ void germinal_centre::mutate_clone_pool() {
         gc.at(i) = antibody;
     }
      */
-
 
 
     // JKK: then, somewhere here, we need to get the fitness (?!...)
@@ -100,8 +94,6 @@ germinal_centre::germinal_centre(const int sz,
     // JKK: 2DO: the constructor & initialising them there ...
 }
 
-// JKK: hang on a tick - what about random number gens?
-
 germinal_centre::germinal_centre(const germinal_centre & other) :
 min(other.min), max(other.max), lambda(other.lambda), af(other.af) {
     i_dist = std::unique_ptr<random_integer>(new random_integer(min, max));
@@ -140,9 +132,24 @@ germinal_centre & germinal_centre::operator=(const germinal_centre & other) {
 // this is (relatively) new, refer to e.g. 
 // https://smartbear.com/blog/develop/c11-tutorial-introducing-the-move-constructor-and/
 
+// JKK: also, check:
+// https://stackoverflow.com/questions/3283778/why-can-i-not-push-back-a-unique-ptr-into-a-vector#3283795
+
+// You need to move the unique_ptr:
+
+// vec.push_back(std::move(ptr2x));
+
+// unique_ptr guarantees that a single unique_ptr container has ownership of 
+// the held pointer. This means that you can't make copies of a unique_ptr 
+// (because then two unique_ptrs would have ownership), so you can only move it.
+
+// JKK: DAH! this is irritating, so let's leave this (as it works fine) &
+// JKK: press on ...
+
 germinal_centre & germinal_centre::operator=(const germinal_centre && other) {
 
     if (this != &other) { // self-assignment check expected
+        // release our unique pointers
         while (!gc.empty()) {
             gc.pop_back();
         }
@@ -161,8 +168,8 @@ germinal_centre & germinal_centre::operator=(const germinal_centre && other) {
     return *this;
 }
 
-germinal_centre::germinal_centre(const germinal_centre && other) :
-lambda(other.lambda), min(other.min), max(other.max), af(other.af) {
+germinal_centre::germinal_centre(const germinal_centre && other): 
+    lambda(other.lambda), min(other.min), max(other.max), af(other.af) {
 
     // then copy the RHS data ...
     i_dist = std::unique_ptr<random_integer>(new random_integer(min, max));

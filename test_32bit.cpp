@@ -113,6 +113,8 @@ int main(int argc, char** argv) {
     gc1 = gc2;
     
     
+    //gc1.somatic_hypermutation
+   
     return 0;
 }
 
