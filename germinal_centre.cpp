@@ -92,7 +92,21 @@ germinal_centre::germinal_centre(const germinal_centre & _gc) {
     germinal_centre & germinal_centre::operator=(const germinal_centre & other ) {
         if (this != &other) { // self-assignment check expected
             if (other.size() != size()) {
-                
+                // need to delete our unique_pointers
+                while (!gc.empty()) {
+                    gc.pop_back();
+                }
+            }
+            // then copy the RHS data ...
+            lambda=other.lambda;
+            min=other.min;
+            max=other.max;
+            af=other.af; 
+            // this has the side effect of creating a clonal pool
+            for (int i = 0; i < other.af.size(); i++) 
+            {
+                gc.push_back(std::make_unique<_addressable_float>(af));
+                std::cout << af << std::endl;
             }
         }
         return *this;
