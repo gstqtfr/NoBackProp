@@ -20,6 +20,7 @@ int germinal_centre::get_random_length() const {
 }
 
 // JKK: make this inline? private? (i.e. just get hotspot)
+
 _addressable_float germinal_centre::somatic_hypermutation(const _addressable_float & af) {
 
     auto hotspot = i_dist->get();
@@ -31,10 +32,10 @@ _addressable_float germinal_centre::somatic_hypermutation(const _addressable_flo
 // : connections_dist(1, operatorsCount)
 
 germinal_centre::germinal_centre(const int sz,
-        const _addressable_float & _af, 
-        int _min, 
+        const _addressable_float & _af,
+        int _min,
         int _max,
-        float _lambda): min(_min), max(_max), lambda(_lambda) {
+        float _lambda) : min(_min), max(_max), lambda(_lambda) {
 
     af = _af;
     i_dist = std::unique_ptr<random_integer>(new random_integer(min, max));
@@ -57,58 +58,38 @@ germinal_centre::germinal_centre(const int sz,
     // JKK: 2DO: the constructor & initialising them there ...
 }
 
-germinal_centre::germinal_centre(const germinal_centre & _gc) {
-    
-    
-    /*
-    // so, we need to copy across all the stuff from _gc
-    // hopefully, without fucking the whole thing in half
-    // Q: what happens if it's already initialised?
-    // ... by which i mean *this ...
-    // A: hang on, by default, this is a *constructor*, so by 
-    //    the semantics of ctors, it shouldn't be already 
-    //    constructed ...
-    // so let's press on ...
-    
-    lambda=_gc.lambda;
-    min=_gc.min;
-    max=_gc.max;
-    af = _gc.af;
-    
+// JKK: hang on a tick - what about random number gens?
+
+germinal_centre::germinal_centre(const germinal_centre & other): 
+    min(other.min), max(other.max), lambda(other.lambda), af(other.af) {
     i_dist = std::unique_ptr<random_integer>(new random_integer(min, max));
-
-    // bit hacky, but this is how we create & initialise 
-    // an array (use vector, then make_unique) ...
-    for (int i = 0; i < _gc.af.size(); i++) {
-        gc.push_back(af);
-        std::cout << af << std::endl;
+    // also, creates a clonal pool
+    for (int i = 0; i < other.af.size(); i++) {
+        gc.push_back(std::make_unique<_addressable_float>(af));
+        std::cout << "copy ctor: " << af << std::endl;
     }
+}
 
-    
-    */
-    }
-    
-    // copy assignment operator
-    germinal_centre & germinal_centre::operator=(const germinal_centre & other ) {
-        if (this != &other) { // self-assignment check expected
-            if (other.size() != size()) {
-                // need to delete our unique_pointers
-                while (!gc.empty()) {
-                    gc.pop_back();
-                }
-            }
-            // then copy the RHS data ...
-            lambda=other.lambda;
-            min=other.min;
-            max=other.max;
-            af=other.af; 
-            // this has the side effect of creating a clonal pool
-            for (int i = 0; i < other.af.size(); i++) 
-            {
-                gc.push_back(std::make_unique<_addressable_float>(af));
-                std::cout << af << std::endl;
+// copy assignment operator
+germinal_centre & germinal_centre::operator=(const germinal_centre & other) {
+    if (this != &other) { // self-assignment check expected
+        if (other.size() != size()) {
+            // need to delete our unique_pointers
+            while (!gc.empty()) {
+                gc.pop_back();
             }
         }
-        return *this;
+        // then copy the RHS data ...
+        lambda = other.lambda;
+        min = other.min;
+        max = other.max;
+        af = other.af;
+        i_dist = std::unique_ptr<random_integer>(new random_integer(min, max));
+        // this has the side effect of creating a clonal pool
+        for (int i = 0; i < other.af.size(); i++) {
+            gc.push_back(std::make_unique<_addressable_float>(af));
+            std::cout << "op=  ctor: " << af << std::endl;
+        }
     }
-    
+    return *this;
+}

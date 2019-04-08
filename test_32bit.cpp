@@ -104,11 +104,10 @@ int main(int argc, char** argv) {
     }
     
     std::cout << "testing germinal_centre copy ctor" << std::endl;
-    
     germinal_centre gc2(gc1);
     
-    
-    
+    std::cout << "testing copy assignment" << std::endl;
+    germinal_centre gc3 = gc2;
     
     
     return 0;

@@ -9,9 +9,7 @@
 #include "s32bit.h"
 #include "addressable_float.h"
 
-_addressable_float::~_addressable_float() {
-    std::cout << "_addressable_float::~_addressable_float()" << std::endl;
-}
+_addressable_float::~_addressable_float() { }
 
 std::ostream & operator<<(std::ostream & os, const _addressable_float & af) 
 {
