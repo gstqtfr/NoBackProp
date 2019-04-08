@@ -45,13 +45,12 @@ private:
     std::vector<std::unique_ptr<_addressable_float>> gc;
     int min;
     int max;
-
     float lambda;
+    
     // JKK: RESTORE TO PRIVATE once tested
     //const unsigned short inline get_hotspot() const; 
     //const unsigned short inline get_random_length() const
-
-
+    
 public:
     
     germinal_centre() { }
@@ -64,6 +63,8 @@ public:
     
     germinal_centre(const germinal_centre &);
     
+    germinal_centre(const germinal_centre &&);
+    
     ~germinal_centre() { 
         // do nothing, let the system worry about the 
         // unique_pointers ...
@@ -72,9 +73,15 @@ public:
     // copy assignment operator
     germinal_centre & operator=(const germinal_centre &); 
     
+    // move assignment op - we have to manage unique_ptrs, so
+    // need to declare to manage the situation ...
+    germinal_centre & operator=(const germinal_centre &&); 
+    
     const int unsigned inline size() const {
         return af.size();
     }
+    
+    void mutate_clone_pool();
     
     _addressable_float somatic_hypermutation(const _addressable_float & u);
     
@@ -86,6 +93,7 @@ public:
     float exp_dist(float x) {
        return (lambda * exp(-lambda * x));
     }
+    
 };
 
 
