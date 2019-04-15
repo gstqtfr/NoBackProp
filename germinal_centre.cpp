@@ -75,9 +75,8 @@ germinal_centre::germinal_centre(const int sz,
 
     af = _af;
     i_dist = std::unique_ptr<random_integer>(new random_integer(min, max));
-
-    // bit hacky, but this is how we create & initialise 
-    // an array (use vector, then make_unique) ...
+    
+    // load u0p our clonal pool
     for (int i = 0; i < sz; i++) {
         gc.push_back(af._addressable_float_factory(af));
     }

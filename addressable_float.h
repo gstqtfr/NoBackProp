@@ -321,10 +321,15 @@ public:
         return pos;
     }
 
-    std::unique_ptr<_addressable_float> _addressable_float_factory(_addressable_float __af) {
+    std::unique_ptr<_addressable_float> _addressable_float_factory(const _addressable_float & __af) const {
         return std::make_unique<_addressable_float>(__af);
     }
-
+   
+    _addressable_float _addressable_float_reference_factory(const _addressable_float & __af) const {
+        _addressable_float _af = __af;
+        return _af;
+    }
+    
     friend std::ostream & operator<<(std::ostream &, const _addressable_float &);
 };
 

@@ -26,12 +26,13 @@ class clone_and_mutate {
 private:
     _addressable_float af;
     std::unique_ptr<random_integer> i_dist;
-    std::list<_addressable_float> gc;
+    std::unique_ptr<random_integer> i_binary;
+    std::list<_addressable_float> clonal_pool;
     int min;
     int max;
     float lambda;
-
-    float exp_dist(float x) {
+    
+    float exp_dist(float x) const {
         return (lambda * exp(-lambda * x));
     }
 
@@ -39,11 +40,11 @@ public:
 
     clone_and_mutate() { }
 
-    clone_and_mutate(const int sz,
-            const _addressable_float & _af,
-            int,
-            int,
-            float);
+    clone_and_mutate(const int,
+            const _addressable_float &,
+            const int,
+            const int,
+            const float);
 
     clone_and_mutate(const clone_and_mutate &);
 
@@ -56,17 +57,16 @@ public:
     ~clone_and_mutate();
 
     const int unsigned inline size() const {
-        return af.size();
+        return clonal_pool.size();
     }
 
     void mutate_clone_pool();
 
-    _addressable_float somatic_hypermutation(const _addressable_float &);
+    _addressable_float & somatic_hypermutation(const _addressable_float &);
 
-    // JKK: RESTORE TO PRIVATE once tested? ...
-    int get_hotspot() const;
+    const int get_hotspot() const;
 
-    int get_random_length() const;
+    const int get_random_length() const;
 
 
 };
