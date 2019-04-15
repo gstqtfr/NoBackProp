@@ -16,8 +16,9 @@
 
 #include <memory>
 #include <iostream>
-#include <vector>
 #include <math.h>
+#include <vector>
+#include <list>
 #include "addressable_float.h"
 #include "random_integer.h"
 
